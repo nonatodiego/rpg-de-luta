@@ -87,7 +87,25 @@ class Character {
     }
 
     doAttack(attacking,attacked){
-        console.log(`${attacking.name} está atacando ${attacked.name}`)
+        if(attacking.life <= 0 || attacked.life <= 0) {
+            alert(`o inimigo está morto.`)
+            return
+        }
+
+        let attackFactor = (Math.random() * 2).toFixed(2)
+        let defenseFactor = (Math.random() * 2).toFixed(2)
+        
+        let actualAttack = attacking.attack * attackFactor
+        let actualDeffense = attacked.defense * defenseFactor 
+
+        if(actualAttack > actualDeffense) {
+            attacked.life -= actualAttack.toFixed(2) 
+            console.log(`${attacking.name} casou ${actualAttack.toFixed(2)} dano em ${attacked.name}`)
+        } else {
+            console.log(`${attacked.name} conseguiu defender...`)
+        }
+
+        this.update();
     }
   }
 
