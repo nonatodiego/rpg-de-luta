@@ -59,11 +59,12 @@ class Character {
   }
   
   class Stage {
-    constructor(fighter1, fighter2, fighter1El, fighter2El) {
+    constructor(fighter1, fighter2, fighter1El, fighter2El,logObject) {
       this.fighter1 = fighter1
       this.fighter2 = fighter2
       this.fighter1El = fighter1El
       this.fighter2El = fighter2El
+      this.log = logObject
     }
   
     start() {
@@ -88,7 +89,7 @@ class Character {
 
     doAttack(attacking,attacked){
         if(attacking.life <= 0 || attacked.life <= 0) {
-            alert(`o inimigo está morto.`)
+            this.log.addMessage(`o inimigo está morto.`)
             return
         }
 
@@ -100,9 +101,9 @@ class Character {
 
         if(actualAttack > actualDeffense) {
             attacked.life -= actualAttack.toFixed(2) 
-            console.log(`${attacking.name} casou ${actualAttack.toFixed(2)} dano em ${attacked.name}`)
+            this.log.addMessage(`${attacking.name} casou ${actualAttack.toFixed(2)} dano em ${attacked.name}`)
         } else {
-            console.log(`${attacked.name} conseguiu defender...`)
+            this.log.addMessage(`${attacked.name} conseguiu defender`)
         }
 
         this.update();
